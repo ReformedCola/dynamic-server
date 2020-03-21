@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Register</title>
+</head>
+<body>
+  <form id="registerForm">
+    <div>
+      <label>Username <input type="text" name="name"></label>
+    </div>
+    <div>
+      <label>Password <input type="password" name="password"></label>
+    </div>
+    <div>
+      <button type="submit">Register</button>
+    </div>
+  </form>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    const $form = $('#registerForm')
+    $form.on('submit', (e) => {
+      e.preventDefault()
+      const name = $form.find('input[name=name]').val()
+      const password = $form.find('input[name=password').val()
+      console.log(name, password)
+      $.ajax({
+        method: 'POST',
+        url: '/register',
+        contentType: 'text/json; charset=UTF-8',
+        data: JSON.stringify({name, password})
+      }).then(() => {
+        alert('Registered Successfully')
+        location.href = '/sign_in.html'
+      }, () => {})
+    })
+  </script>
+</body>
+</html>
